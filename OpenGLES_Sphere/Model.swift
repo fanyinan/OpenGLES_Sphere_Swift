@@ -65,9 +65,9 @@ class Model {
     glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexBuffer)
 //    glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer)
     
-    glVertexAttribPointer(baseEffect.position, 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(sizeof(Vertex)), nil)
-    glVertexAttribPointer(baseEffect.color, 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(sizeof(Vertex)), BUFFER_OFFSEET(3 * sizeof(GLfloat)))
-    glVertexAttribPointer(baseEffect.normal, 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(sizeof(Vertex)), BUFFER_OFFSEET(7 * sizeof(GLfloat)))
+    glVertexAttribPointer(baseEffect.position, 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), nil)
+    glVertexAttribPointer(baseEffect.color, 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSEET(3 * MemoryLayout<GLfloat>.size))
+    glVertexAttribPointer(baseEffect.normal, 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSEET(7 * MemoryLayout<GLfloat>.size))
     
     glBindVertexArray(0)
     glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0)
@@ -76,10 +76,10 @@ class Model {
     
   }
   
-  func BUFFER_OFFSEET(n: Int) -> UnsafePointer<Void> {
+  func BUFFER_OFFSEET(_ n: Int) -> UnsafeRawPointer {
     
-    let offset: UnsafePointer<Void> = nil
-    return offset + n
+    return UnsafeRawPointer(bitPattern: n)!
+    
   }
   
   func modelMatrix() -> GLKMatrix4 {

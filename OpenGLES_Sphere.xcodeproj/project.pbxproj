@@ -117,6 +117,8 @@
 				TargetAttributes = {
 					CF3FD6211D4DC30700F23910 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 4RQRV7P524;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -277,11 +279,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4RQRV7P524;
 				INFOPLIST_FILE = OpenGLES_Sphere/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "fyn.OpenGLES-Sphere";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -289,11 +293,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4RQRV7P524;
 				INFOPLIST_FILE = OpenGLES_Sphere/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "fyn.OpenGLES-Sphere";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

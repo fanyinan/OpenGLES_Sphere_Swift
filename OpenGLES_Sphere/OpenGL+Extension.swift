@@ -11,7 +11,7 @@ import GLKit
 extension Array {
   
   var size: GLsizeiptr {
-    return count * sizeof(Element)
+    return count * MemoryLayout<Element>.size
   }
 }
 

@@ -27,7 +27,7 @@ class ViewController: GLKViewController {
     // Dispose of any resources that can be recreated.
   }
 
-  override func glkView(view: GLKView, drawInRect rect: CGRect) {
+  override func glkView(_ view: GLKView, drawIn rect: CGRect) {
     
     glClearColor(0, 0, 0, 1)
     glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
@@ -41,13 +41,13 @@ class ViewController: GLKViewController {
   
   func setupContext() {
     
-    let context = EAGLContext(API: .OpenGLES2)
-    EAGLContext.setCurrentContext(context)
+    let context = EAGLContext(api: .openGLES2)
+    EAGLContext.setCurrent(context)
     
     let glkView = view as! GLKView
-    glkView.context = context
+    glkView.context = context!
     
-    glkView.drawableDepthFormat = .Format16
+    glkView.drawableDepthFormat = .format16
   }
 
   func setupScene() {
@@ -62,7 +62,7 @@ class ViewController: GLKViewController {
 
 extension ViewController: GLKViewControllerDelegate {
   
-  func glkViewControllerUpdate(controller: GLKViewController) {
+  func glkViewControllerUpdate(_ controller: GLKViewController) {
     
     sphere.update(timeSinceLastUpdate)
   }

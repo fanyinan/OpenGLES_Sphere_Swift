@@ -13,19 +13,19 @@ class BaseEffect {
   var vertexShaderName: String
   var fragmentShaderName: String
   
-  private var programHandle: GLuint!
-  private var projectionMatrixUniform: Int32!
-  private var modelViewMatrixUniform:Int32!
-  private var lightColorUniform: Int32!
-  private var lightAmbientIntensityUniform: Int32!
-  private var lightDirectionUniform: Int32!
-  private var lightDiffuseIntensityUniform: Int32!
-  private var lightSpecularIntensityUniform: Int32!
-  private var lightSpecularShininessUniform: Int32!
+  fileprivate var programHandle: GLuint!
+  fileprivate var projectionMatrixUniform: Int32!
+  fileprivate var modelViewMatrixUniform:Int32!
+  fileprivate var lightColorUniform: Int32!
+  fileprivate var lightAmbientIntensityUniform: Int32!
+  fileprivate var lightDirectionUniform: Int32!
+  fileprivate var lightDiffuseIntensityUniform: Int32!
+  fileprivate var lightSpecularIntensityUniform: Int32!
+  fileprivate var lightSpecularShininessUniform: Int32!
   
-  private(set) var position: GLuint!
-  private(set) var color: GLuint!
-  private(set) var normal: GLuint!
+  fileprivate(set) var position: GLuint!
+  fileprivate(set) var color: GLuint!
+  fileprivate(set) var normal: GLuint!
   
   var projectionMatrix: GLKMatrix4!
   var modelViewMatrix: GLKMatrix4!
@@ -54,11 +54,11 @@ class BaseEffect {
     glUniform1f(lightSpecularShininessUniform, 3)
   }
   
-  func compileShader(shaderName: String, shaderType: GLenum) -> GLuint {
+  func compileShader(_ shaderName: String, shaderType: GLenum) -> GLuint {
     
-    let shaderPath = NSBundle.mainBundle().pathForResource(shaderName, ofType: "glsl")!
-    let shaderStr = try! NSString(contentsOfFile: shaderPath, encoding: NSUTF8StringEncoding)
-    var shaderUTF8String = shaderStr.UTF8String
+    let shaderPath = Bundle.main.path(forResource: shaderName, ofType: "glsl")!
+    let shaderStr = try! NSString(contentsOfFile: shaderPath, encoding: String.Encoding.utf8.rawValue)
+    var shaderUTF8String = shaderStr.utf8String
     var shaderStrLength = GLint(shaderStr.length)
     
     let shaderHandle = glCreateShader(shaderType)
@@ -74,11 +74,11 @@ class BaseEffect {
       var logLength: GLint = GLint()
       glGetShaderiv(shaderHandle, GLenum(GL_INFO_LOG_LENGTH), &logLength)
       
-      var log = [CChar](count: Int(logLength), repeatedValue: 0)
+      var log = [CChar](repeating: 0, count: Int(logLength))
       
       glGetShaderInfoLog(shaderHandle, logLength, &logLength, &log)
       
-      print("compile shader error: \(String(UTF8String: log))")
+      print("compile shader error: \(String(validatingUTF8: log))")
     }
     
     return shaderHandle
@@ -117,10 +117,10 @@ class BaseEffect {
       
       var logLength: GLsizei = GLsizei()
       glGetProgramiv(programHandle, GLenum(GL_INFO_LOG_LENGTH), &logLength)
-      var logInfo = [CChar](count: Int(logLength), repeatedValue: 0)
+      var logInfo = [CChar](repeating: 0, count: Int(logLength))
       glGetProgramInfoLog(programHandle, logLength, &logLength, &logInfo)
       
-      print("link error: \(String(UTF8String: logInfo))")
+      print("link error: \(String(validatingUTF8: logInfo))")
     }
     
   }

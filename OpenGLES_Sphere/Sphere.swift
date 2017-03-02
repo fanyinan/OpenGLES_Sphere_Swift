@@ -80,6 +80,7 @@ class Sphere: Model {
     let v: (x: GLfloat, y: GLfloat, z: GLfloat) = (point2.0 - point1.0, point2.1 - point1.1, point2.2 - point1.2)
     let w: (x: GLfloat, y: GLfloat, z: GLfloat) = (point3.0 - point1.0, point3.1 - point1.1, point3.2 - point1.2)
     
+    //http://baike.baidu.com/view/1486647.htm
     let x = v.y * w.z - v.z * w.y
     let y = v.z * w.x - v.x * w.z
     let z = v.x * w.y - v.y * w.x
@@ -98,7 +99,7 @@ class Sphere: Model {
     
   }
   
-  func update(dt: NSTimeInterval) {
+  func update(_ dt: TimeInterval) {
     
     rotationX = rotationX + Float(dt * M_PI / 8)
 //    rotationY = rotationY + Float(dt * M_PI / 8)
